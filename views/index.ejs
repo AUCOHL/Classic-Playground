@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CloudV IDE</title>
+        <script src="/fabric/fabric.js"></script>
+    	<script src="/ace/ace.js" type="text/javascript" charset="UTF-8"></script>
+    	<script src="/ace/mode-verilog-custom.min.js" type="text/javascript" charset="UTF-8"></script>
+    	<script src="/ace/theme-twilight.js" type="text/javascript" charset="UTF-8"></script>
+    	<script src="/ace/theme-crimson_editor.js" type="text/javascript" charset="UTF-8"></script>
+    	<script src="/ace/ext-language_tools.js" type="text/javascript" charset="UTF-8"></script>
+        <link rel="stylesheet" type="text/css" href="/IDE/stylesheets/animate.css"/>
+        <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/IDE/jqueryui/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="/IDE/jqueryui/jquery-ui.theme.css">
+        <link rel="stylesheet" type="text/css" href="/IDE/stylesheets/ide.min.css"/>
+    </head>
+    <body>
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-screen-div animated infinite flash">
+                  <p class="loading-screen-p">Loading Workspace<span class="serif-dots">..</span></p>
+            </div>
+        </div>
+        <div id="ide" class="ide-body">
+            <div id="menubar-toolbar">
+                <div id="menubar" class="menubar">
+                    <ul id="menu" class="bluemenu">
+                      <li class="menubar-topmenu">File
+                          <ul class="menubar-topitem">
+                              <li id="menu-new">New
+                                  <ul>
+                                      <li id="menu-new-verilog" class="menubar-item">Verilog Module</li>
+                                      <li id="menu-new-testbench" class="menubar-item">Verilog Testbench</li>
+                                  </ul>
+                              </li>
+                              <li id="menu-new-folder" class="menubar-item">New Folder</li>
+                              <li id="menu-save" class="menubar-item">Save</li>
+                              <li id="menu-search" class="menubar-item">Search</li>
+                          </ul>
+                      </li>
+                      <li class="menubar-topmenu">Edit
+                          <ul class="menubar-topitem">
+                              <li id="menu-undo" class="menubar-item">Undo</li>
+                              <li id="menu-redo" class="menubar-item">Redo</li>
+                              <li id="menu-select-all" class="menubar-item">Select All</li>
+                              <li id="menu-find" class="menubar-item">Find</li>
+                              <li id="menu-replace" class="menubar-item">Find and Replace</li>
+                          </ul>
+                      </li>
+                      <li class="menubar-topmenu">Operation
+                        <ul class="menubar-topitem">
+                          <li id="menu-copy" class="menubar-item">Copy</li>
+                          <li id="menu-cut" class="menubar-item">Cut</li>
+                          <li id="menu-paste" class="menubar-item">Paste</li>
+                          <li id="menu-rename" class="menubar-item">Rename</li>
+                          <li id="menu-delete" class="menubar-item">Delete</li>
+                          <li id="menu-third-seperator" class="menubar-seperator"></li>
+                          <li id="menu-duplicate" class="menubar-item">Duplicate</li>
+                        </ul>
+                      </li>
+                      <li class="menubar-topmenu">Project
+                          <ul class="menubar-topitem">
+                              <li id="menu-synthesize" class="menubar-item">Synthesize</li>
+                              <li id="menu-simulate" class="menubar-item">Simulate</li>
+                              <li id="menu-settings" class="menubar-item">Workspace Settings</li>
+                          </ul>
+                      </li>
+                      <li class="menubar-topmenu">Help
+                          <ul class="menubar-topitem">
+                              <li id="menu-about" class="menubar-item">About</li>
+                          </ul>
+                      </li>
+                    </ul>
+                </div>
+                <div class="vertical-seperator"></div>
+                <div id="toolbar" class="toolbar">
+                    <button id="toolbar-synthesize" class="toolbar-btn">Synthesize</button>
+                	<button id="toolbar-simulate" class="toolbar-btn">Simulate</button>
+                </div>
+            </div>
+
+            <div id="files-editors-logs">
+                <div id="files" class="split split-horizontal content"></div>
+                <div id="editors-logs" class="split split-horizontal">
+                    <div id="editors" class="split content editors">
+                        <div id="dialog-box"></div>
+                        <div id="dialog-confirm"></div>
+                        <div id="prompt-dialog"></div>
+                        <div id="loading-div-background">
+                            <div id="loading-div" class="ui-corner-all" >
+                              <img id="loading-image" src="/images/loading.gif" alt="Loading.."/>
+                              <h2 id="loading-text">Please wait..</h2>
+                             </div>
+                        </div>
+                        <div id="editor-tabs" class="editor-tabs">
+                            <ul>
+                                <button id="btn-new-tab" class="btn-new-tab">New File</button>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="logs" class="split content">
+                        <div id="log-tabs" class="logging-tabs">
+                          <ul>
+                            <li><a href="#console">Console</a></li>
+                            <li><a href="#errors">Errors</a></li>
+                            <li><a href="#warnings">Warnings</a></li>
+                          </ul>
+                          <div id="console">
+                              <div class="scrollabe-grid">
+                                  <ol id="console-list" class="selectable-list">
+                                  </ol>
+                              </div>
+                          </div>
+                          <div id="errors">
+                            <div class="scrollabe-grid">
+                                <ol id="error-list" class="selectable-list">
+                                </ol>
+                            </div>
+                          </div>
+                          <div id="warnings">
+                            <div class="scrollabe-grid">
+                                <ol id="warning-list" class="selectable-list">
+                                </ol>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/assets/jquery/dist/jquery.min.js"><\/script>')</script>
+        <script src="/javascripts/vendor/jquery-ui-1.11.4/jquery-ui.min.js" charset="utf-8"></script>
+        <script src="/javascripts/vendor/jquery.noty.packaged.js" charset="utf-8"></script>
+        <script src="/javascripts/ide.min.js"></script>
+
+    </body>
+</html>

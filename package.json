@@ -1,0 +1,36 @@
+{
+  "name": "cloudv-ide",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "body-parser": "^1.15.2",
+    "bson": "^0.5.5",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.2.0",
+    "ejs": "~2.4.1",
+    "ejs-locals": "^1.0.2",
+    "express": "~4.13.4",
+    "http-server": "^0.9.0",
+    "mathjs": "^3.5.3",
+    "mkdirp": "^0.5.1",
+    "morgan": "~1.7.0",
+    "rimraf": "^2.5.4",
+    "serve-favicon": "~2.3.0",
+    "shortid": "^2.2.6"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.11.0",
+    "gulp": "^3.9.1",
+    "gulp-coffee": "^2.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7"
+  }
+}
