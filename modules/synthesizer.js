@@ -74,7 +74,6 @@ synthesize = function(filesPath, filesArray, topModule, topModuleContent, stdcel
       })();
       args = args.join(' ');
       cmd = "yosys -q " + args + " -p 'hierarchy -check -top " + topModule + "' " + procOpt + " -p opt -p techmap -p opt " + stdcellOpt + " -p clean " + memorymapOpt + " " + flattenOpt + " " + purgeOpt + "  -p 'write_verilog -noattr -noexpr " + synthName + "'";
-      console.log(cmd);
       return exec(cmd, {
         cwd: filesPath,
         maxBuffer: 5000 * 1024,
@@ -104,7 +103,7 @@ synthesize = function(filesPath, filesArray, topModule, topModuleContent, stdcel
             if (line.trim() === '' || /^i give up\.$/i.test(line.trim())) {
               continue;
             }
-            if (/warning *\: *([\s\S]*)/im.test(line)) {
+            if (/warning *\: *([\s\S]*)/im.test(line) || /Yosys does support them/im.test(line)) {
               warningEntry = {};
               warningEntry.file = null;
               warningEntry.message = line;
