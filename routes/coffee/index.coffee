@@ -22,7 +22,7 @@ router.post '/compile', (req, res, next) ->
 	topModuleContent = ''
 	synthesisFolderName = "#{(new Date()).getTime()}_#{shortid.generate()}_#{(Math.random().toString().slice(2))}"
 	synthesisFolderPath = path.join process.cwd(), "temp/#{synthesisFolderName}"
-	mkdirp synthesisFolderPath, mode: 0o0666, (err) ->
+	mkdirp synthesisFolderPath, mode: 0o0755, (err) ->
 		if err
 			console.error err
 			return res.status(500).json error: 'An error occurred while creating the repository structure.'
@@ -30,7 +30,7 @@ router.post '/compile', (req, res, next) ->
 			writtenFiles = []
 			async.eachSeries synthesisFiles, ((file, callback) ->
 				fileFolderPath = path.join synthesisFolderPath, "#{file.name}_#{(new Date()).getTime()}_#{shortid.generate()}_#{(Math.random().toString().slice(2))}"
-				mkdirp fileFolderPath, mode: 0o0666, (err) ->
+				mkdirp fileFolderPath, mode: 0o0755, (err) ->
 					if err
 						console.error err
 						return callback 'An error occurred while creating the repository structure.'
@@ -50,7 +50,7 @@ router.post '/compile', (req, res, next) ->
 					return res.status(500).json err
 				else
 					netlistFolderPath = path.join synthesisFolderPath, "#{netlistName}_#{(new Date()).getTime()}_#{shortid.generate()}_#{(Math.random().toString().slice(2))}"
-					mkdirp netlistFolderPath, mode: 0o0666, (err) ->
+					mkdirp netlistFolderPath, mode: 0o0755, (err) ->
 						if err
 							console.error err
 							return res.status(500).json error: 'An error occurred while creating the repository structure.'
@@ -95,7 +95,7 @@ router.post '/simulate', (req, res, next) ->
 	simulationFolderName = "#{(new Date()).getTime()}_#{shortid.generate()}_#{(Math.random().toString().slice(2))}"
 	simulationFolderPath = path.join process.cwd(), "temp/#{simulationFolderName}"
 	reverseMap = {}
-	mkdirp simulationFolderPath, mode: 0o0666, (err) ->
+	mkdirp simulationFolderPath, mode: 0o0755, (err) ->
 		if err
 			console.error err
 			return res.status(500).json error: 'An error occurred while creating the repository structure.'
@@ -103,7 +103,7 @@ router.post '/simulate', (req, res, next) ->
 			writtenFiles = []
 			async.eachSeries simulationFiles, ((file, callback) ->
 				fileFolderPath = path.join simulationFolderPath, "#{file.name}_#{(new Date()).getTime()}_#{shortid.generate()}_#{(Math.random().toString().slice(2))}"
-				mkdirp fileFolderPath, mode: 0o0666, (err) ->
+				mkdirp fileFolderPath, mode: 0o0755, (err) ->
 					if err
 						console.error err
 						return callback 'An error occurred while creating the repository structure.'
@@ -136,7 +136,7 @@ router.post '/simulate', (req, res, next) ->
 					return res.status(500).json err
 				else
 					vcdFilePath = path.join simulationFolderPath, "#{vcdName}_#{(new Date()).getTime()}_#{shortid.generate()}_#{(Math.random().toString().slice(2))}"
-					mkdirp vcdFilePath, mode: 0o0666, (err) ->
+					mkdirp vcdFilePath, mode: 0o0755, (err) ->
 						if err
 							console.error err
 							return res.status(500).json error: 'An error occurred while creating the repository structure.'

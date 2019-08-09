@@ -15,7 +15,7 @@ generateWave = (vcdContent, cb) ->
 	sourcePath = path.join fullPath, vcdName
 	scriptPath = path.join process.cwd(), "modules"
 
-	fs.mkdir fullPath, 0o0666, (err) ->
+	fs.mkdir fullPath, 0o0755, (err) ->
 		if err
 			console.error err
 			return cb error: 'Failed to get process VCD file.'
@@ -81,7 +81,7 @@ simulate = (filesPath, filesArray, fullPath, nameMap, dumpName, cb) ->
 					for i in [1...filesArray.length]
 						names = "#{names} #{filesArray[i].replace /\\/gm, '\\\\'}"
 
-					cmd = "iverilog #{names} -s #{topModule} -Wall -o #{vvpName}"
+					cmd = "iverilog -s #{topModule} -Wall -o '#{vvpName}' #{names}"
 					console.log cmd
 
 					simulatorProc = exec cmd,
