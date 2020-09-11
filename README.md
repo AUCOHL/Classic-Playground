@@ -34,4 +34,4 @@ To launch the app, invoke `npm run start`, where you can then visit the link pri
 You can configure the environment variables `PORT` and `CV_IP` to your liking, i.e. `PORT=8080 npm run start`, for example.
 
 # ⚖️ License
-The GNU General Public License v3, or at your option, any later version. Check 'LICENSE'.
+Apache 2.0, or at your option, any later version. Check 'LICENSE'.
