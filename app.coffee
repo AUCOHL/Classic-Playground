@@ -7,6 +7,8 @@ bodyParser = require 'body-parser'
 routes = require './routes/index'
 rmdir = require 'rimraf'
 
+console.log("Starting app…")
+
 app = express()
 # view engine setup
 app.set 'views', path.join(__dirname, 'views')
